@@ -1,0 +1,61 @@
+# Deploys the static export to GitHub Pages on every push to main.
+#
+# One-time setup (GitHub repo Settings → Pages → Build and deployment →
+# Source: "GitHub Actions"). The base path is derived automatically from
+# the repository name, so /username/repo-name/ URLs work out of the box.
+name: Deploy ell. to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      # Static export with the base path set to the repository name
+      # (e.g. /ell) so assets and routing survive on project sites.
+      # For a user site (username.github.io) remove NEXT_BASE_PATH below.
+      - name: Build static site
+        run: npm run build:static
+        env:
+          NEXT_EXPORT: "1"
+          NEXT_BASE_PATH: /${{ github.event.repository.name }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

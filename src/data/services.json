@@ -1,0 +1,30 @@
+[
+  {
+    "id": "graphic-design",
+    "index": "01",
+    "title": "Graphic Design",
+    "description": "Visual identities, posters, layouts and print-ready artwork — designed with clear structure and a strong typographic voice.",
+    "tags": ["Brand identity", "Poster & layout", "Print-ready files"]
+  },
+  {
+    "id": "social-media",
+    "index": "02",
+    "title": "Social Media Design",
+    "description": "Content systems that keep a feed consistent — templates, carousels and campaign visuals made for scrolling, sharing and remembering.",
+    "tags": ["Feed systems", "Carousels", "Campaign visuals"]
+  },
+  {
+    "id": "video-editing",
+    "index": "03",
+    "title": "Video Editing",
+    "description": "Cuts that keep people watching — short-form reels, recaps and simple motion graphics, paced to fit the story they tell.",
+    "tags": ["Short-form video", "Reels & recaps", "Simple motion"]
+  },
+  {
+    "id": "photography",
+    "index": "04",
+    "title": "Photography",
+    "description": "Clean, well-lit images of people, products and places — shot simply, edited carefully, delivered ready to use.",
+    "tags": ["Product shots", "Street & candid", "Light retouch"]
+  }
+]
